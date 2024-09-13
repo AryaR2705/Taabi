@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Taabi Mobility Data Visualization</h1>
+    <form id="plot-form">
+        <label for="plot-type">Select Plot Type:</label>
+        <select name="plot_type" id="plot-type">
+            <option value="speed_over_time">Vehicle Speed over Time</option>
+            <option value="fuel_consumption_over_time">Fuel Consumption over Time</option>
+            <option value="engine_load_distribution">Engine Load Distribution by Hour of Day</option>
+            <option value="avg_speed_by_day">Average Speed by Day of Week</option>
+            <option value="fuel_economy_vs_time">Fuel Economy vs Time of Day</option>
+            <option value="engine_temp_over_time">Engine Oil Temperature over Time</option>
+            <option value="correlation_heatmap">Correlation Heatmap of Numerical Variables</option>
+            <option value="speed_vs_rpm">Vehicle Speed vs Engine RPM (colored by time)</option>
+            <option value="fuel_consumption_rate">Fuel Consumption Rate over Time</option>
+            <option value="cumulative_distance">Cumulative Distance Traveled</option>
+            <option value="avg_speed_by_month">Average Speed by Month</option>
+            <option value="avg_fuel_consumption_by_hour">Average Fuel Consumption by Hour of Day</option>
+            <option value="pair_plot">Pair Plot of Selected Variables</option>
+            <option value="rolling_averages">Rolling Averages</option>
+            <option value="engine_load_by_gear">Engine Load by Selected Gear</option>
+            <option value="speed_by_gear">Vehicle Speed by Selected Gear</option>
+            <option value="acceleration_over_time">Acceleration over Time</option>
+        </select>
+        <button type="submit">Generate Plot</button>
+    </form>
+    <button id="view-map">See Vehicle Activity on Map</button>
+    <div id="plot-container"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#plot-form').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '/generate',
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#plot-container').html('<img src="data:image/png;base64,' + response.image + '" alt="Generated Plot">');
+                    },
+                    error: function() {
+                        alert('An error occurred while generating the plot.');
+                    }
+                });
+            });
+
+            $('#view-map').on('click', function() {
+                window.location.href = '/vehicle_map';
+            });
+        });
+    </script>
+</body>
+</html>
