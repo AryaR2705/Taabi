@@ -4,6 +4,8 @@
 CHECK THE HOSTED VERSION : https://taabi-2.onrender.com/
 
 
+CHECK THIS VIDEO OF WEBSITE : https://youtu.be/GaHrku9dERc
+
 
 1. Data Loading and Preprocessing (10%)
 
