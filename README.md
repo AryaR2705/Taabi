@@ -1,7 +1,7 @@
 # Taabi
 
 
-https://taabi-2.onrender.com/
+CHECK THE HOSTED VERSION : https://taabi-2.onrender.com/
 
 
 
